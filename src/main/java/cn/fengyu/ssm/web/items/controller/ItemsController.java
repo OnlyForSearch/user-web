@@ -1,6 +1,10 @@
 package cn.fengyu.ssm.web.items.controller;
 
 import cn.fengyu.ssm.web.items.po.Items;
+import cn.fengyu.ssm.web.items.po.ItemsCustom;
+import cn.fengyu.ssm.web.items.po.ItemsQueryVo;
+import cn.fengyu.ssm.web.items.service.ItemsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,17 +23,17 @@ import java.util.List;
 @Controller
 public class ItemsController{
 
- /*   @Autowired
+   @Autowired
     private ItemsService itemsService;
 
     @RequestMapping("/queryItems2")
     public ModelAndView queryItems2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-         List<Items> itemsList = itemsService.findItemsList(new ItemsQueryVo());
+         List<ItemsCustom> itemsList = itemsService.findItemsList(new ItemsQueryVo());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("itemsList", itemsList).setViewName("items/itemsList");
         return modelAndView;
-    }*/
+    }
     /**
      * config:7_1定义方法注解
      * @param request

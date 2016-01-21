@@ -1,6 +1,6 @@
 package cn.fengyu.ssm.web.items.service;
 
-import cn.fengyu.ssm.web.items.po.Items;
+import cn.fengyu.ssm.web.items.po.ItemsCustom;
 import cn.fengyu.ssm.web.items.po.ItemsQueryVo;
 
 import java.util.List;
@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ItemsService {
 
-    List<Items> findItemsList(ItemsQueryVo itemsVo);
+    List<ItemsCustom> findItemsList(ItemsQueryVo itemsVo) throws Exception;
 }

@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!--config:6 别名扫描-->
 	<typeAliases>
 		<!--<typeAlias type="cn.fengyu.ssm"/>-->
-		<package name="cn.feng.web.ssm"/>
+		<package name="cn.fengyu.ssm.web"/>
 		<package name="com.github.pagehelper.model"/>
 	</typeAliases>
 
