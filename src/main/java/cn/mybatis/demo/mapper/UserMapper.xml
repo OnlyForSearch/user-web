@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mybatis.demo.mapper.UserMapper">
+
+    <!--开启本mapper的namespace下 二级缓存-->
+    <cache  type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+    <select id="findUserCount" resultType="java.lang.Integer" parameterType="cn.mybatis.demo.po.UserQueryVo">
+        SELECT count(*) FROM user
+        <where>
+            <include refid="query_user_where"/>
+        </where>
+
+    </select>
+    <sql id="query_user_where">
+        <if test="userCustom!=null">
+              <if test="userCustom.sex!=null and userCustom.sex!=''">
+                  and user.sex=#{userCustom.sex}
+              </if>
+            <if test="userCustom.username!=null and userCustom.username!=''">
+                and user.username like '%${userCustom.username}%'
+            </if>
+            <if test="ids!=null">
+                <foreach collection="ids" item="id" open="and (" close=")" separator="or">
+                    id=#{id}
+                </foreach>
+            </if>
+        </if>
+    </sql>
+    <select id="findUserList" resultType="cn.mybatis.demo.po.User">
+        SELECT * FROM user
+        <where>
+            <include refid="query_user_where"/>
+
+        </where>
+
+    </select>
+
+
+
+
+    <resultMap id="userResuleMap" type="cn.mybatis.demo.po.User">
+        <id column="id_" property="id"/>
+        <result column="username_" property="username"/>
+    </resultMap>
+    <select id="findUserByIdResultMap" parameterType="int" resultMap="userResuleMap">
+        SELECT
+            id       id_,
+            username username_
+        FROM user
+        WHERE id = #{id};
+
+    </select>
+
+
+    <select id="findUserById" parameterType="int" resultType="cn.mybatis.demo.po.User">
+        SELECT *
+        FROM USER
+        WHERE id = #{value}
+    </select>
+    <select id="findUserByName" parameterType="java.lang.String" resultType="cn.mybatis.demo.po.User">
+        SELECT *
+        FROM user
+        WHERE username LIKE '%${value}%'
+
+    </select>
+
+    <insert id="insertUser" parameterType="cn.mybatis.demo.po.User">
+        <selectKey keyProperty="id" resultType="integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into user(username,birthday,sex,address) value(#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <delete id="deleteUser" parameterType="integer">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateUser">
+        UPDATE user
+        SET username = #{username}, birthday = #{birthday}, sex = #{sex}, address = #{address}
+        WHERE id = #{id}
+    </update>
+
+
+</mapper>

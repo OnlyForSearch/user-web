@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--config:3 配置扫描Controller-->
+    <context:component-scan base-package="cn.fengyu.ssm.web"/>
+
+
+    <!--config:4 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
+    mvc:annotation-driven默认加载很多的参数绑定方法， 比如json转换解析器就默认加载了，-->
+    <mvc:annotation-driven/>
+    <!--config:5 视图解析器 解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 配置jsp路径的前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 配置jsp路径的后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+</beans>
