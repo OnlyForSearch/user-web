@@ -1,7 +1,7 @@
 package cn.fengyu.ssm.web.orders.po;
 
-import cn.mybatis.demo.po.User;
-import cn.mybatis.demo2.po.OrderDetail;
+
+import cn.fengyu.ssm.web.orderteail.po.OrderDetail;
 
 import java.sql.Date;
 import java.util.List;
@@ -17,17 +17,17 @@ public class Orders {
     private Date createtime;
     private String node;
 
-    private User user;
+//    private User user;
     private List<OrderDetail>orderDetails;
 
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
@@ -85,7 +85,7 @@ public class Orders {
                 ", number='" + number + '\'' +
                 ", createtime=" + createtime +
                 ", node='" + node + '\'' +
-                ", user=" + user +
+
                 ", orderDetails=" + orderDetails +
                 '}';
     }

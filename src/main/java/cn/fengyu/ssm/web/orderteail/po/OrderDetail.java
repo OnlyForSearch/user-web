@@ -1,6 +1,7 @@
 package cn.fengyu.ssm.web.orderteail.po;
 
-import cn.mybatis.demo2.po.Items;
+
+import cn.fengyu.ssm.web.items.po.Items;
 
 /**
  * @author: fengyu

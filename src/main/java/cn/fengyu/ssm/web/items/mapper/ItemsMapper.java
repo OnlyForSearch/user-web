@@ -1,15 +1,24 @@
 package cn.fengyu.ssm.web.items.mapper;
 
 
-import cn.fengyu.ssm.web.items.po.ItemsCustom;
-import cn.fengyu.ssm.web.items.po.ItemsQueryVo;
-
-
-import java.util.List;
+import cn.fengyu.ssm.web.items.po.Items;
 
 public interface ItemsMapper {
 
-  public  List<ItemsCustom> findItemsList(ItemsQueryVo itemsVo)throws Exception;
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Items record);
+
+    int insertSelective(Items record);
 
 
+
+    Items selectByPrimaryKey(Integer id);
+
+
+    int updateByPrimaryKeySelective(Items record);
+
+    int updateByPrimaryKeyWithBLOBs(Items record);
+
+    int updateByPrimaryKey(Items record);
 }

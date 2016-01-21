@@ -1,16 +1,19 @@
 package cn.fengyu.ssm.web.items.po;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Items {
     private Integer id;
 
+    @Size(min = 1, max = 30)
     private String name;
 
     private Float price;
 
     private String pic;
-
+    @NotNull
     private Date createtime;
 
     private String detail;
