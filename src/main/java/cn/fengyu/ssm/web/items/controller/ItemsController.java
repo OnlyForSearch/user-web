@@ -1,6 +1,7 @@
 package cn.fengyu.ssm.web.items.controller;
 
 import cn.fengyu.ssm.exception.AppException;
+import cn.fengyu.ssm.interceptor.AuthPassport;
 import cn.fengyu.ssm.web.items.po.ItemsCustom;
 import cn.fengyu.ssm.web.items.po.ItemsQueryVo;
 import cn.fengyu.ssm.web.items.service.ItemsService;
@@ -41,6 +42,7 @@ public class ItemsController {
     }
 
 
+    @AuthPassport
     @RequestMapping("/queryItems")
     public ModelAndView queryItems(HttpServletRequest request,
                                    ItemsQueryVo itemsQueryVo) throws Exception {

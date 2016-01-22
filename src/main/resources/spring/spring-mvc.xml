@@ -9,7 +9,7 @@
     <!-- 开启controller注解支持 -->
     <!-- use-default-filters="false" 只扫描指定的注解 -->
     <!-- 可以扫描controller、service、... 这里让扫描controller，指定controller的包 -->
-    <context:component-scan base-package="cn.fengyu.ssm.web.*.controller" />
+    <context:component-scan base-package="cn.fengyu.ssm.web.*.controller"/>
     <context:annotation-config/>
     <!-- ************************************************************************* -->
 
@@ -17,24 +17,24 @@
         比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
         实际开发时使用mvc:annotation-driven -->
     <!--conversion-service="conversionService"-->
-    <mvc:annotation-driven conversion-service="conversionService"  validator="validator" >
-      <!-- <mvc:message-converters>
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator">
+        <!-- <mvc:message-converters>
 
-            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
-            <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-        </mvc:message-converters>-->
+              <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+              <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+              <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+          </mvc:message-converters>-->
     </mvc:annotation-driven>
     <!-- 自定义参数绑定 -->
-     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-         <!-- 转换器 -->
-         <property name="converters">
-             <list>
-                 <!-- 日期类型转换 -->
-                 <bean class="cn.fengyu.ssm.converter.DateConverter"/>
-             </list>
-         </property>
-     </bean>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!-- 转换器 -->
+        <property name="converters">
+            <list>
+                <!-- 日期类型转换 -->
+                <bean class="cn.fengyu.ssm.converter.DateConverter"/>
+            </list>
+        </property>
+    </bean>
 
 
     <!-- 自定义参数绑定 -->
@@ -53,8 +53,8 @@
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <!-- 资源文件名-->
         <property name="basenames">
-        <value>ValidationMessages</value>
-                <!--<value>classpath:CustomValidationMessages</value>-->
+            <value>ValidationMessages</value>
+            <!--<value>classpath:CustomValidationMessages</value>-->
 
         </property>
         <!-- 资源文件编码格式 -->
@@ -92,10 +92,11 @@
     <bean class="cn.fengyu.ssm.exception.AppExceptionResolver"/>
     <!-- ************************************************************************* -->
     <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="cn.fengyu.ssm.interceptor.LoginHandlerInterceptor"/>
-        </mvc:interceptor>
+
+        <!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+        <bean class="cn.fengyu.ssm.interceptor.LoginHandlerInterceptor"/>
+
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="cn.fengyu.ssm.interceptor.HandlerInterceptor1"/>
