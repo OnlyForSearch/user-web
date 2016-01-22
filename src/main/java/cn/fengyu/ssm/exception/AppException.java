@@ -1,6 +1,6 @@
 package cn.fengyu.ssm.exception;
 
-/**
+/**基本应用异常
  * @author fengyu
  * @since 2016-01-22
  */

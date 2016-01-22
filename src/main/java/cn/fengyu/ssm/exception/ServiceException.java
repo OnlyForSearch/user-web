@@ -1,6 +1,6 @@
 package cn.fengyu.ssm.exception;
 
-/**
+/**用于抛出service层的异常
  * @author fengyu
  * @since 2016-01-22
  */

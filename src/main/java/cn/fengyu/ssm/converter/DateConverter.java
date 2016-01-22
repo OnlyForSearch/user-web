@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * 日期转换器
+ * 将yyyy-MM-dd HH:mm:ss格式的String转换为Date
  */
 public class DateConverter implements Converter<String,Date>{
 
