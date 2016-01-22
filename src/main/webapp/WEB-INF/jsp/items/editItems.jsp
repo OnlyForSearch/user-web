@@ -17,7 +17,7 @@ ${allErrors}
 	${ error.defaultMessage}<br/>
 </c:forEach>
 </c:if>--%>
-
+${errCode}-${errMsg }
 <form id="itemForm" action="${pageContext.request.contextPath }/items/editItemsSubmit.action" method="post" >
 <input type="hidden" name="id" value="${items.id }"/>
 修改商品信息：

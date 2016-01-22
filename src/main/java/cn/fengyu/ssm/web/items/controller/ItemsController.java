@@ -1,5 +1,6 @@
 package cn.fengyu.ssm.web.items.controller;
 
+import cn.fengyu.ssm.exception.AppException;
 import cn.fengyu.ssm.web.items.po.ItemsCustom;
 import cn.fengyu.ssm.web.items.po.ItemsQueryVo;
 import cn.fengyu.ssm.web.items.service.ItemsService;
@@ -71,8 +72,11 @@ public class ItemsController {
         ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
         //判断商品是否为空，根据id没有查询到商品，抛出异常，提示用户商品信息不存 在
 //		if(itemsCustom == null){
-//			throw new CustomException("修改的商品信息不存在!");
+//			throw new AppException("修改的商品信息不存在!");
 //		}
+        if (itemsCustom != null) {
+            throw new AppException("修改商品信息已存在",299);
+        }
 
         // 通过形参中的model将model数据传到页面
         // 相当于modelAndView.addObject方法
