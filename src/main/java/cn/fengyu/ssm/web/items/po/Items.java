@@ -1,6 +1,5 @@
 package cn.fengyu.ssm.web.items.po;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -13,7 +12,7 @@ public class Items {
     private Float price;
 
     private String pic;
-    @NotNull
+//    @NotNull
     private Date createtime;
 
     private String detail;

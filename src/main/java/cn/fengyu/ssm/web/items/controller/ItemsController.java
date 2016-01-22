@@ -11,13 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.util.*;
 
 
 @Controller
@@ -98,12 +97,14 @@ public class ItemsController {
         return itemsCustom;
 
     }
-
+    //图片上传和数据校验
     @RequestMapping("/editItemsSubmit")
     public String editItemsSubmit(Model model,
                                   Integer id,
                                   @Validated ItemsCustom itemsCustom,
-                                  BindingResult bindingResult) throws Exception {
+                                  BindingResult bindingResult,
+                                  MultipartFile items_pic
+    ) throws Exception {
 
         if (bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
@@ -115,6 +116,25 @@ public class ItemsController {
                 // 出错重新到商品修改页面
                 return "items/editItems";
             }
+        }
+
+        if (items_pic != null) {
+            String picName = items_pic.getOriginalFilename();
+            if (picName != null && picName.length() > 0) {
+                StringBuilder stringBuilder = new StringBuilder();
+                //设置图片存放位置
+                stringBuilder.append("D:\\user-web-imgserver\\upload\\temp\\");
+                int length = stringBuilder.length();
+                //设置图片名称
+                stringBuilder.append(UUID.randomUUID());
+                stringBuilder.append(picName.substring(picName.lastIndexOf(".")));
+                File file = new File(stringBuilder.toString());
+                //从内存中写入硬盘
+                items_pic.transferTo(file);
+                itemsCustom.setPic(stringBuilder.substring(length));
+
+            }
+
         }
 
         // 调用service更新商品信息，页面需要将商品信息传到此方法
@@ -129,8 +149,7 @@ public class ItemsController {
 
         // 调用service批量删除商品
         // ...
-
-        return "success";
+       return "success";
 
     }
 

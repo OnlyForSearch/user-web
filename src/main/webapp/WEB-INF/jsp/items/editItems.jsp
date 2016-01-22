@@ -18,8 +18,8 @@ ${allErrors}
 </c:forEach>
 </c:if>--%>
 ${errCode}-${errMsg }
-<%--<form id="itemForm" action="${pageContext.request.contextPath }/items/editItemsSubmit.action" method="post" >--%>
-<form id="itemForm" action="${pageContext.request.contextPath }/items/testJson" method="post" >
+<form id="itemForm" action="${pageContext.request.contextPath }/items/editItemsSubmit.action" enctype="multipart/form-data" method="post" >
+<%--<form id="itemForm" action="${pageContext.request.contextPath }/items/testJson" method="post" >--%>
 <input type="hidden" name="id" value="${items.id }"/>
 修改商品信息：
 <table width="100%" border=1>
@@ -35,7 +35,7 @@ ${errCode}-${errMsg }
 	<td>商品生产日期</td>
 	<td><input type="text" name="createtime" value="<fmt:formatDate value="${items.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/></td>
 </tr>
-<%--<tr>
+<tr>
 	<td>商品图片</td>
 	<td>
 		<c:if test="${items.pic !=null}">
@@ -44,7 +44,7 @@ ${errCode}-${errMsg }
 		</c:if>
 		<input type="file"  name="items_pic"/> 
 	</td>
-</tr>--%>
+</tr>
 <tr>
 	<td>商品简介</td>
 	<td>
