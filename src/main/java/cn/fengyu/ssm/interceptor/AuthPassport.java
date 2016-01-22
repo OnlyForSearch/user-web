@@ -2,7 +2,7 @@ package cn.fengyu.ssm.interceptor;
 
 import java.lang.annotation.*;
 
-/**自定义注解AuthPassport
+/**自定义注解AuthPassport权限
  * @author Administrator
  *
  */
