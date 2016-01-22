@@ -21,7 +21,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
             AuthPassport authPassport = ((HandlerMethod) handler)
                     .getMethodAnnotation(AuthPassport.class);
             // 没有声明需要权限,或者声明不验证权限
-            if (authPassport == null || authPassport.validate() == false)
+            if (authPassport == null || !authPassport.validate())
                 return true;
             else {
                 // 在这里实现自己的权限验证逻辑
