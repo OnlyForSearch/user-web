@@ -65,18 +65,18 @@ public class ItemsController {
 
     @RequestMapping(value = "/editItems", method = {RequestMethod.POST,
             RequestMethod.GET})
-     public String editItems(Model model,
+    public String editItems(Model model,
                             @RequestParam(value = "id") Integer items_id)
             throws Exception {
 
         // 调用service根据商品id查询商品信息
         ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
         //判断商品是否为空，根据id没有查询到商品，抛出异常，提示用户商品信息不存 在
-//		if(itemsCustom == null){
-//			throw new AppException("修改的商品信息不存在!");
-//		}
+        //		if(itemsCustom == null){
+        //			throw new AppException("修改的商品信息不存在!");
+        //		}
         if (itemsCustom == null) {
-            throw new AppException("修改商品信息已存在",299);
+            throw new AppException("修改商品信息已存在", 299);
         }
 
         // 通过形参中的model将model数据传到页面
@@ -102,7 +102,7 @@ public class ItemsController {
     @RequestMapping("/editItemsSubmit")
     public String editItemsSubmit(Model model,
                                   Integer id,
-                                 @Validated ItemsCustom itemsCustom,
+                                  @Validated ItemsCustom itemsCustom,
                                   BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
@@ -162,18 +162,47 @@ public class ItemsController {
         return "success";
     }
 
+    //jsonTest.jsp请求json，输出是json;
+
     @RequestMapping(value = "/testJson")
-    public @ResponseBody ItemsCustom testJson( @RequestBody ItemsCustom itemsCustom) {
+
+    public
+    @ResponseBody
+    ItemsCustom testJson(@RequestBody ItemsCustom itemsCustom) {
 
 
         java.text.DateFormat format1 = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-       String s = format1.format(itemsCustom.getCreatetime());
+        String s = format1.format(itemsCustom.getCreatetime());
         System.out.println(s);
         System.out.println("itemsCustom = " + itemsCustom);
         itemsCustom.setCreatetime(new Date());
         itemsCustom.setId(222);
-        System.out.println("时间戳"+itemsCustom.getCreatetime().getTime());
+        System.out.println("时间戳" + itemsCustom.getCreatetime().getTime());
         return itemsCustom;
     }
+
+    // @RequestBody去掉,请求key/value，输出是json
+    @RequestMapping(value = "/testJson2")
+    public
+    @ResponseBody
+    ItemsCustom testJson2(ItemsCustom itemsCustom) {
+
+
+        itemsCustom.setCreatetime(new Date());
+        itemsCustom.setId(333);
+        System.out.println("时间戳" + itemsCustom.getCreatetime().getTime());
+        return itemsCustom;
+    }
+
+    //Restful风格:@PathVariable必须加才可以识别路径变量
+    @RequestMapping("/testRestful/{id}/")
+    public
+    @ResponseBody
+    ItemsCustom testRestful(@PathVariable("id") Integer id) throws Exception {
+        ItemsCustom itemsCustom = itemsService.findItemsById(id);
+
+        return itemsCustom;
+    }
+
 
 }
