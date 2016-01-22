@@ -40,8 +40,9 @@
             cn.feng.web.ssm.orderdetail.mapper,cn.feng.web.ssm.orders.mapper"></property> -->
      <!--   <property name="basePackage" value="cn.fengyu.ssm.web.*.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
-        <property name="basePackage" value="cn.fengyu.ssm.web.items.mapper"/>
-
+      <!--  <property name="basePackage" value="cn.fengyu.ssm.web.items.mapper"/>
+-->
+        <property name="basePackage" value="cn.fengyu.ssm.web.*.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
