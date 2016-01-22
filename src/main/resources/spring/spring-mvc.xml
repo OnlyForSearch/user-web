@@ -11,27 +11,24 @@
     <!-- use-default-filters="false" 只扫描指定的注解 -->
     <!-- 可以扫描controller、service、... 这里让扫描controller，指定controller的包 -->
     <context:component-scan base-package="cn.fengyu.ssm.web.*.controller" />
-
+    <context:annotation-config/>
     <!-- ****************************************************************************************************** -->
 
 
     <!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置 mvc:annotation-driven默认加载很多的参数绑定方法，
         比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
         实际开发时使用mvc:annotation-driven -->
-    <mvc:annotation-driven conversion-service="conversionService"
-                           validator="validator"></mvc:annotation-driven>
+    <!--conversion-service="conversionService"-->
+    <mvc:annotation-driven   validator="validator">
+      <!--  <mvc:message-converters>
+            <bean class="cn.fengyu.ssm.converter.DateConverter"/>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>-->
+    </mvc:annotation-driven>
     <!-- 自定义参数绑定 -->
-    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <!-- 转换器 -->
-        <property name="converters">
 
-                <!-- 日期类型转换 -->
-                <bean class="cn.fengyu.ssm.converter.DateConverter"/>
-
-        </property>
-
-
-    </bean>
 
     <!-- 校验器 -->
     <bean id="validator"
@@ -65,6 +62,11 @@
         <!-- 配置jsp路径的后缀 -->
         <property name="suffix" value=".jsp"/>
     </bean>
+    <!-- 静态资源解析
+        包括 ：js、css、img、..
+         -->
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/img/" mapping="/img/**"/>
 
 
     <!-- 全局异常处理器 只要实现HandlerExceptionResolver接口就是全局异常处理器 -->

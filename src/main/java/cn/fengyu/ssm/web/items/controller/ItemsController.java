@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +75,7 @@ public class ItemsController {
 //		if(itemsCustom == null){
 //			throw new AppException("修改的商品信息不存在!");
 //		}
-        if (itemsCustom != null) {
+        if (itemsCustom == null) {
             throw new AppException("修改商品信息已存在",299);
         }
 
@@ -159,6 +160,20 @@ public class ItemsController {
             throws Exception {
 
         return "success";
+    }
+
+    @RequestMapping(value = "/testJson")
+    public @ResponseBody ItemsCustom testJson( @RequestBody ItemsCustom itemsCustom) {
+
+
+        java.text.DateFormat format1 = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+       String s = format1.format(itemsCustom.getCreatetime());
+        System.out.println(s);
+        System.out.println("itemsCustom = " + itemsCustom);
+        itemsCustom.setCreatetime(new Date());
+        itemsCustom.setId(222);
+        System.out.println("时间戳"+itemsCustom.getCreatetime().getTime());
+        return itemsCustom;
     }
 
 }
